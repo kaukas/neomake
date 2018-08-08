@@ -87,7 +87,7 @@ testvim: | build $(DEP_PLUGINS)
 # 4. non-Neomake log lines (e.g. from :Log) in bold/bright yellow.
 _SED_HIGHLIGHT_ERRORS:=| contrib/highlight-log --compact vader
 # Need to close stdin to fix spurious 'sed: couldn't write X items to stdout: Resource temporarily unavailable'.
-_REDIR_STDOUT:=2>&1 </dev/null >/dev/null $(_SED_HIGHLIGHT_ERRORS)
+_REDIR_STDOUT:=
 
 # Neovim might quit after ~5s with stdin being closed.  Use --headless mode to
 # work around this.
