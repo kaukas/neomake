@@ -65,16 +65,12 @@ testnvimx: testnvim
 testvimx: override VADER_OPTIONS+=-x
 testvimx: testvim
 
-# Allow to override this for AppVeyor tests.
-VADER_OUTPUT_FILE?=/dev/stderr
-
 # Set Neovim logfile destination to prevent `.nvimlog` being created.
 testnvim: export NVIM_LOG_FILE:=/dev/stderr
 testnvim: TEST_VIM:=nvim
 # Neovim needs a valid HOME (https://github.com/neovim/neovim/issues/5277).
 testnvim: build/neovim-test-home
 testnvim: TEST_VIM_PREFIX+=HOME=$(CURDIR)/build/neovim-test-home
-testnvim: TEST_VIM_PREFIX+=VADER_OUTPUT_FILE=$(VADER_OUTPUT_FILE)
 testnvim: | build $(DEP_PLUGINS)
 	$(call func-run-vim)
 
