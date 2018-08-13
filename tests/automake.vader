@@ -865,7 +865,10 @@ Execute (Automake pre-creates maker_job instances):
   let tmpdir = tempname()
   exe 'file '.tmpdir.'/file'
   normal! ifoo
-  AssertNeomakeMessage "\\v^unnamed_maker: could not change to maker's cwd \\(".tmpdir."\\): .*"
+  let tmpdir = fnamemodify(tmpdir, ':p')
+  AssertNeomakeMessage printf(
+  \ '\v^unnamed_maker: could not change to maker''s cwd \(%s\): .*',
+  \ escape(tmpdir, '\'))
   NeomakeTestsWaitForFinishedJobs
 
   bwipe!
